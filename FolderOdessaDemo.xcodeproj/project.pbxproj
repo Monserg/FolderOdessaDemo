@@ -8,21 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7DA1F8530E200999139 /* AppDelegate.swift */; };
-		B183D7DD1F8530E200999139 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7DC1F8530E200999139 /* ViewController.swift */; };
 		B183D7DF1F8530E200999139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B183D7DE1F8530E200999139 /* Assets.xcassets */; };
 		B183D7E21F8530E200999139 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B183D7E01F8530E200999139 /* Main.storyboard */; };
 		B183D7EB1F8531C700999139 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = B183D7EA1F8531C700999139 /* ReadMe */; };
+		B183D7F41F8536EF00999139 /* FolderShowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7EE1F8536EF00999139 /* FolderShowPresenter.swift */; };
+		B183D7F51F8536EF00999139 /* FolderShowWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7EF1F8536EF00999139 /* FolderShowWorker.swift */; };
+		B183D7F61F8536EF00999139 /* FolderShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F01F8536EF00999139 /* FolderShowRouter.swift */; };
+		B183D7F71F8536EF00999139 /* FolderShowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F11F8536EF00999139 /* FolderShowModels.swift */; };
+		B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F21F8536EF00999139 /* FolderShowViewController.swift */; };
+		B183D7F91F8536EF00999139 /* FolderShowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F31F8536EF00999139 /* FolderShowInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B183D7D71F8530E200999139 /* FolderOdessaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolderOdessaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B183D7DA1F8530E200999139 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B183D7DC1F8530E200999139 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B183D7DE1F8530E200999139 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B183D7E11F8530E200999139 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B183D7E31F8530E200999139 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B183D7E41F8530E200999139 /* FolderOdessaDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FolderOdessaDemo.entitlements; sourceTree = "<group>"; };
 		B183D7EA1F8531C700999139 /* ReadMe */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
+		B183D7EE1F8536EF00999139 /* FolderShowPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowPresenter.swift; sourceTree = "<group>"; };
+		B183D7EF1F8536EF00999139 /* FolderShowWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowWorker.swift; sourceTree = "<group>"; };
+		B183D7F01F8536EF00999139 /* FolderShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowRouter.swift; sourceTree = "<group>"; };
+		B183D7F11F8536EF00999139 /* FolderShowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowModels.swift; sourceTree = "<group>"; };
+		B183D7F21F8536EF00999139 /* FolderShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowViewController.swift; sourceTree = "<group>"; };
+		B183D7F31F8536EF00999139 /* FolderShowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,13 +67,34 @@
 			isa = PBXGroup;
 			children = (
 				B183D7DA1F8530E200999139 /* AppDelegate.swift */,
-				B183D7DC1F8530E200999139 /* ViewController.swift */,
+				B183D7EC1F85336500999139 /* Scenes */,
 				B183D7DE1F8530E200999139 /* Assets.xcassets */,
 				B183D7E01F8530E200999139 /* Main.storyboard */,
 				B183D7E31F8530E200999139 /* Info.plist */,
 				B183D7E41F8530E200999139 /* FolderOdessaDemo.entitlements */,
 			);
 			path = FolderOdessaDemo;
+			sourceTree = "<group>";
+		};
+		B183D7EC1F85336500999139 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B183D7ED1F85337E00999139 /* FolderShow */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B183D7ED1F85337E00999139 /* FolderShow */ = {
+			isa = PBXGroup;
+			children = (
+				B183D7F31F8536EF00999139 /* FolderShowInteractor.swift */,
+				B183D7F11F8536EF00999139 /* FolderShowModels.swift */,
+				B183D7EE1F8536EF00999139 /* FolderShowPresenter.swift */,
+				B183D7F01F8536EF00999139 /* FolderShowRouter.swift */,
+				B183D7F21F8536EF00999139 /* FolderShowViewController.swift */,
+				B183D7EF1F8536EF00999139 /* FolderShowWorker.swift */,
+			);
+			path = FolderShow;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +169,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B183D7DD1F8530E200999139 /* ViewController.swift in Sources */,
 				B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */,
+				B183D7F71F8536EF00999139 /* FolderShowModels.swift in Sources */,
+				B183D7F91F8536EF00999139 /* FolderShowInteractor.swift in Sources */,
+				B183D7F41F8536EF00999139 /* FolderShowPresenter.swift in Sources */,
+				B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */,
+				B183D7F51F8536EF00999139 /* FolderShowWorker.swift in Sources */,
+				B183D7F61F8536EF00999139 /* FolderShowRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
