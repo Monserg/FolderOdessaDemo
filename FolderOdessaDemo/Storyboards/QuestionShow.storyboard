@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Question Show View Controller-->
+        <scene sceneID="XYV-44-kNX">
+            <objects>
+                <viewController storyboardIdentifier="QuestionShowVC" id="or1-A6-IF6" customClass="QuestionShowViewController" customModule="FolderOdessaDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="2NM-E8-OQK">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="124"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C1q-bU-fVg">
+                                <rect key="frame" x="18" y="87" width="74" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Folder path" id="IxW-xj-kBL">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YyQ-5R-yhc">
+                                <rect key="frame" x="20" y="57" width="260" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="Please enter folder path" drawsBackground="YES" id="Fyr-q8-kC0">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fyb-s3-Eyd">
+                                <rect key="frame" x="74" y="13" width="102" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="vg2-aP-xEh"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zqc-hE-pr7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="handlerCancelButtonPress:" target="or1-A6-IF6" id="SiH-bj-V2c"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PvY-v8-WnN">
+                                <rect key="frame" x="184" y="13" width="102" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="bd6-bY-Ndy"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Find" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A59-Qf-mFw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="handlerFindButtonPress:" target="or1-A6-IF6" id="QL7-CU-LVX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="C1q-bU-fVg" firstAttribute="leading" secondItem="2NM-E8-OQK" secondAttribute="leading" constant="20" id="4tK-eP-RJH"/>
+                            <constraint firstItem="C1q-bU-fVg" firstAttribute="top" secondItem="2NM-E8-OQK" secondAttribute="top" constant="20" id="Dca-Si-6ST"/>
+                            <constraint firstItem="fyb-s3-Eyd" firstAttribute="top" secondItem="YyQ-5R-yhc" secondAttribute="bottom" constant="16" id="LGM-vd-s5Z"/>
+                            <constraint firstItem="PvY-v8-WnN" firstAttribute="centerY" secondItem="fyb-s3-Eyd" secondAttribute="centerY" id="Ps8-RC-T0s"/>
+                            <constraint firstItem="PvY-v8-WnN" firstAttribute="height" secondItem="fyb-s3-Eyd" secondAttribute="height" id="Qsp-96-MB5"/>
+                            <constraint firstItem="PvY-v8-WnN" firstAttribute="leading" secondItem="fyb-s3-Eyd" secondAttribute="trailing" constant="20" id="SdK-gP-b2h"/>
+                            <constraint firstItem="YyQ-5R-yhc" firstAttribute="leading" secondItem="2NM-E8-OQK" secondAttribute="leading" constant="20" id="dcQ-D4-QEv"/>
+                            <constraint firstItem="PvY-v8-WnN" firstAttribute="width" secondItem="fyb-s3-Eyd" secondAttribute="width" id="hZR-cS-NMg"/>
+                            <constraint firstAttribute="trailing" secondItem="PvY-v8-WnN" secondAttribute="trailing" constant="20" id="he4-up-YsV"/>
+                            <constraint firstItem="YyQ-5R-yhc" firstAttribute="top" secondItem="C1q-bU-fVg" secondAttribute="bottom" constant="8" id="jAP-nb-x7w"/>
+                            <constraint firstAttribute="trailing" secondItem="YyQ-5R-yhc" secondAttribute="trailing" constant="20" id="tN9-PU-rpK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="folderPathTextField" destination="YyQ-5R-yhc" id="0M1-O5-Xn8"/>
+                    </connections>
+                </viewController>
+                <customObject id="2xF-OR-bAE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="150" y="137"/>
+        </scene>
+    </scenes>
+</document>

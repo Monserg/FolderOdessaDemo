@@ -72,11 +72,35 @@ class FolderShowViewController: NSViewController {
         viewSettingsDidLoad()
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        questionViewDidLoad()
+    }
+    
     
     // MARK: - Custom Functions
     func viewSettingsDidLoad() {
         let requestModel = FolderShowModels.Something.RequestModel()
-        interactor?.doSomething(request: requestModel)
+        interactor?.doSomething(request: requestModel)        
+    }
+    
+    func alertUser() {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = NSLocalizedString("Info", comment: "Info title message")
+        alert.informativeText = NSLocalizedString("Please enter any folder name", comment: "Alert informative text")
+        alert.addButton(withTitle: NSLocalizedString("Find", comment: "Find alert action button"))
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel alert action button"))
+
+        alert.beginSheetModal(for: self.view.window!) { (returnCode) in
+            print ("returnCode: ", returnCode)
+        }
+    }
+    
+    func questionViewDidLoad() {
+        let questionShowVC = NSStoryboard(name: NSStoryboard.Name(rawValue: "QuestionShow"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "QuestionShowVC")) as! QuestionShowViewController
+        presentViewControllerAsModalWindow(questionShowVC)
     }
 }
 
@@ -84,7 +108,5 @@ class FolderShowViewController: NSViewController {
 // MARK: - FolderShowDisplayLogic
 extension FolderShowViewController: FolderShowDisplayLogic {
     func displaySomething(viewModel: FolderShowModels.Something.ViewModel) {
-        // NOTE: Display the result from the Presenter
-        // nameTextField.text = viewModel.name
     }
 }
