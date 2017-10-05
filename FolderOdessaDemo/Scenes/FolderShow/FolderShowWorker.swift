@@ -11,9 +11,25 @@
 //
 
 import Cocoa
+import FilesProvider
 
 class FolderShowWorker {
     // MARK: - Business Logic
-    func doSomeWork() {
+    func folderContextLoad(_ completion: @escaping (_ data: [FileObject]) -> ()) {
+        // Get list of files in a directory
+        FolderManager.instance.fileProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
+            var files = [FileObject]()
+            
+            for file in contents {
+                print("Name: \(file.name)")
+                print("Size: \(file.size)")
+                print("Creation Date: \(String(describing: file.creationDate))")
+                print("Modification Date: \(String(describing: file.modifiedDate))")
+                
+                files.append(file)
+            }
+            
+            completion(files)
+        })
     }
 }

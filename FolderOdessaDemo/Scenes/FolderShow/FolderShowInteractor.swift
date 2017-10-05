@@ -32,9 +32,10 @@ class FolderShowInteractor: FolderShowBusinessLogic, FolderShowDataStore {
     // MARK: - Business logic implementation
     func folderLoadContext(withRequestModel requestModel: FolderShowModels.Folder.RequestModel) {
         worker = FolderShowWorker()
-        worker?.doSomeWork()
         
-        let responseModel = FolderShowModels.Folder.ResponseModel()
-        presenter?.presentSomething(response: responseModel)
+        worker?.folderContextLoad({ filesArray in
+            let responseModel = FolderShowModels.Folder.ResponseModel(files: filesArray)
+            self.presenter?.presentSomething(response: responseModel)
+        })
     }
 }

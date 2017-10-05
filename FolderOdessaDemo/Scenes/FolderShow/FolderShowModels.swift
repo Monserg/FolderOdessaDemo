@@ -11,6 +11,7 @@
 //
 
 import Cocoa
+import FilesProvider
 
 // MARK: - Data models
 enum FolderShowModels {
@@ -20,6 +21,7 @@ enum FolderShowModels {
         }
         
         struct ResponseModel {
+            let files: [FileObject]
         }
         
         struct ViewModel {

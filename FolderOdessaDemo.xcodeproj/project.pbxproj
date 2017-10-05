@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E4CCAD972286347245BB324 /* Pods_FolderOdessaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */; };
+		B14B29601F868E0400C078C3 /* FolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14B295F1F868E0400C078C3 /* FolderManager.swift */; };
 		B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7DA1F8530E200999139 /* AppDelegate.swift */; };
 		B183D7DF1F8530E200999139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B183D7DE1F8530E200999139 /* Assets.xcassets */; };
 		B183D7E21F8530E200999139 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B183D7E01F8530E200999139 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B14B295F1F868E0400C078C3 /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
 		B183D7D71F8530E200999139 /* FolderOdessaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolderOdessaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B183D7DA1F8530E200999139 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B183D7DE1F8530E200999139 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 				DA3FFDADC3410A9D1F42E7BD /* Pods-FolderOdessaDemo.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B14B295E1F868DE000C078C3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B14B295F1F868E0400C078C3 /* FolderManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		B183D7CE1F8530E200999139 = {
@@ -135,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				B183D82E1F85623800999139 /* Extensions */,
+				B14B295E1F868DE000C078C3 /* Managers */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -321,6 +332,7 @@
 				B183D7F41F8536EF00999139 /* FolderShowPresenter.swift in Sources */,
 				B183D8301F85625300999139 /* NSViewController+Ext.swift in Sources */,
 				B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */,
+				B14B29601F868E0400C078C3 /* FolderManager.swift in Sources */,
 				B183D7F51F8536EF00999139 /* FolderShowWorker.swift in Sources */,
 				B183D7F61F8536EF00999139 /* FolderShowRouter.swift in Sources */,
 				B183D8291F8558C500999139 /* QuestionShowWorker.swift in Sources */,

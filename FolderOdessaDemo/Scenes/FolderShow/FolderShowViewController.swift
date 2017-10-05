@@ -11,7 +11,7 @@
 //
 
 import Cocoa
-import FilesProvider
+//import FilesProvider
 
 // MARK: - Input & Output protocols
 protocol FolderShowDisplayLogic: class {
@@ -23,11 +23,11 @@ class FolderShowViewController: NSViewController {
     var interactor: FolderShowBusinessLogic?
     var router: (NSObjectProtocol & FolderShowRoutingLogic & FolderShowDataPassing)?
         
-    var documentsProvider: LocalFileProvider! {
-        didSet {
-            documentsProvider.delegate = self
-        }
-    }
+//    var fileProvider: LocalFileProvider? {
+//        didSet {
+//            fileProvider!.delegate = self
+//        }
+//    }
     
         
     // MARK: - Object lifecycle
@@ -76,22 +76,6 @@ class FolderShowViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        documentsProvider = LocalFileProvider(baseURL: (router?.dataStore?.folderURL)!)
-
-        // Get list of files in a directory
-        documentsProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
-            for file in contents {
-                print("Name: \(file.name)")
-                print("Size: \(file.size)")
-                print("Creation Date: \(String(describing: file.creationDate))")
-                print("Modification Date: \(String(describing: file.modifiedDate))")
-            }
-        })
-        
-        // Register a new notification handler
-        documentsProvider.registerNotifcation(path: "/") {
-            self.folderLoadContext()
-        }
     }
     
     override func viewDidAppear() {
@@ -108,56 +92,84 @@ class FolderShowViewController: NSViewController {
         
         // Successfully find entered folder
         questionShowVC.handlerFindSuccessfullCompletion = { () in
-            self.folderLoadContext()
+            if FolderManager.instance.fileProvider == nil {
+                FolderManager.instance.fileProviderCreate(withURL: (self.router?.dataStore?.folderURL)!)
+                
+                // Register a new notification handler
+                FolderManager.instance.fileProvider.registerNotifcation(path: "/") {
+                    self.contextLoad()
+                }
+            }
+            
+            self.contextLoad()
         }
     }
     
-    func folderLoadContext() {
+    func contextLoad() {
         let requestModel = FolderShowModels.Folder.RequestModel()
         self.interactor?.folderLoadContext(withRequestModel: requestModel)
-        print("folder path = \(String(describing: router?.dataStore!.folderURL.absoluteString))")
+        print("folder path = \(String(describing: (router?.dataStore?.folderURL)!.absoluteString))")
     }
+    
+//    func fileProviderCreate() {
+//        fileProvider = LocalFileProvider(baseURL: (router?.dataStore?.folderURL)!)
+//
+////        // Get list of files in a directory
+////        fileProvider!.contentsOfDirectory(path: "/", completionHandler: { contents, error in
+////            for file in contents {
+////                print("Name: \(file.name)")
+////                print("Size: \(file.size)")
+////                print("Creation Date: \(String(describing: file.creationDate))")
+////                print("Modification Date: \(String(describing: file.modifiedDate))")
+////            }
+////        })
+//        
+//        // Register a new notification handler
+//        fileProvider!.registerNotifcation(path: "/") {
+//            self.contextLoad()
+//        }
+//    }
 }
 
 
-// MARK: - FileProviderDelegate
-extension FolderShowViewController: FileProviderDelegate {
-    func fileproviderSucceed(_ fileProvider: FileProviderOperations, operation: FileOperationType) {
-        switch operation {
-        case .copy(source: let source, destination: let dest):
-            print("\(source) copied to \(dest).")
-        
-        case .remove(path: let path):
-            print("\(path) has been deleted.")
-        
-        default:
-            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) succeed")
-        }
-    }
-    
-    func fileproviderFailed(_ fileProvider: FileProviderOperations, operation: FileOperationType, error: Error) {
-        switch operation {
-        case .copy(source: let source, destination: _):
-            print("copy of \(source) failed.")
-        
-        case .remove:
-            print("file can't be deleted.")
-        
-        default:
-            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) failed")
-        }
-    }
-    
-    func fileproviderProgress(_ fileProvider: FileProviderOperations, operation: FileOperationType, progress: Float) {
-        switch operation {
-        case .copy(source: let source, destination: let dest):
-            print("Copy\(source) to \(dest): \(progress * 100) completed.")
-        
-        default:
-            break
-        }
-    }
-}
+//// MARK: - FileProviderDelegate
+//extension FolderShowViewController: FileProviderDelegate {
+//    func fileproviderSucceed(_ fileProvider: FileProviderOperations, operation: FileOperationType) {
+//        switch operation {
+//        case .copy(source: let source, destination: let dest):
+//            print("\(source) copied to \(dest).")
+//
+//        case .remove(path: let path):
+//            print("\(path) has been deleted.")
+//
+//        default:
+//            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) succeed")
+//        }
+//    }
+//
+//    func fileproviderFailed(_ fileProvider: FileProviderOperations, operation: FileOperationType, error: Error) {
+//        switch operation {
+//        case .copy(source: let source, destination: _):
+//            print("copy of \(source) failed.")
+//
+//        case .remove:
+//            print("file can't be deleted.")
+//
+//        default:
+//            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) failed")
+//        }
+//    }
+//
+//    func fileproviderProgress(_ fileProvider: FileProviderOperations, operation: FileOperationType, progress: Float) {
+//        switch operation {
+//        case .copy(source: let source, destination: let dest):
+//            print("Copy\(source) to \(dest): \(progress * 100) completed.")
+//
+//        default:
+//            break
+//        }
+//    }
+//}
 
 
 // MARK: - FolderShowDisplayLogic

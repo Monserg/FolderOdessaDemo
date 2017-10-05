@@ -15,3 +15,6 @@ Case 1 'Create FolderShow VIP-cycle'
 Case 2 'Show folder request view'
 
 Case 3 'Create change file modification monitoring manager'
+
+Case 4 'Get folder context'
+
