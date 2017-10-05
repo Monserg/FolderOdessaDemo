@@ -9,12 +9,15 @@
 //  you can apply clean architecture to your iOS and Mac projects,
 //  see http://clean-swift.com
 //
+//  Folder paths:
+//      /Users/msm72/Downloads
+//      /Users/msm72/Library/Containers/ua.com.remotejob.FolderOdessaDemo
 
 import Cocoa
 
 // MARK: - Input & Output protocols
 protocol QuestionShowDisplayLogic: class {
-    func displaySomething(viewModel: QuestionShowModels.Folder.ViewModel)
+    func folderPresentLoad(fromViewModel viewModel: QuestionShowModels.Folder.ViewModel)
 }
 
 class QuestionShowViewController: NSViewController {
@@ -22,6 +25,8 @@ class QuestionShowViewController: NSViewController {
     var interactor: QuestionShowBusinessLogic?
     var router: (NSObjectProtocol & QuestionShowRoutingLogic & QuestionShowDataPassing)?
     
+    var handlerFindSuccessfullCompletion: (() -> ())?
+
     
     // MARK: - IBOutlets
     @IBOutlet weak var folderPathTextField: NSTextField!
@@ -74,14 +79,18 @@ class QuestionShowViewController: NSViewController {
         super.viewDidLoad()
     }
     
+    deinit {
+        print("QuestionShowVC deinit.")
+    }
     
+
     // MARK: - Custom Functions
     private func viewSettingsDidLoad() {
         if folderPathTextField.stringValue.isEmpty {
             alertViewShow()
         } else {
             let requestModel = QuestionShowModels.Folder.RequestModel(path: folderPathTextField.stringValue)
-            interactor?.folderDidLoad(withRequestModel: requestModel)
+            interactor?.folderLoad(withRequestModel: requestModel)
         }
     }
     
@@ -99,7 +108,11 @@ class QuestionShowViewController: NSViewController {
 
 // MARK: - QuestionShowDisplayLogic
 extension QuestionShowViewController: QuestionShowDisplayLogic {
-    func displaySomething(viewModel: QuestionShowModels.Folder.ViewModel) {
-        dismissViewController(self)
+    func folderPresentLoad(fromViewModel viewModel: QuestionShowModels.Folder.ViewModel) {
+        if viewModel.isFolderExists {
+            router?.routeToFolderShowScene()
+        } else {
+            alertViewShow()
+        }
     }
 }

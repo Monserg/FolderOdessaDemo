@@ -11,16 +11,23 @@
 //
 
 import Cocoa
+import FilesProvider
 
 // MARK: - Input & Output protocols
 protocol FolderShowDisplayLogic: class {
-    func displaySomething(viewModel: FolderShowModels.Something.ViewModel)
+    func folderPresentLoadContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
     var interactor: FolderShowBusinessLogic?
     var router: (NSObjectProtocol & FolderShowRoutingLogic & FolderShowDataPassing)?
+        
+    var documentsProvider: LocalFileProvider! {
+        didSet {
+            documentsProvider.delegate = self
+        }
+    }
     
         
     // MARK: - Object lifecycle
@@ -69,44 +76,92 @@ class FolderShowViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewSettingsDidLoad()
+        documentsProvider = LocalFileProvider(baseURL: (router?.dataStore?.folderURL)!)
+
+        // Get list of files in a directory
+        documentsProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
+            for file in contents {
+                print("Name: \(file.name)")
+                print("Size: \(file.size)")
+                print("Creation Date: \(String(describing: file.creationDate))")
+                print("Modification Date: \(String(describing: file.modifiedDate))")
+            }
+        })
+        
+        // Register a new notification handler
+        documentsProvider.registerNotifcation(path: "/") {
+            self.folderLoadContext()
+        }
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        questionViewDidLoad()
+        questionViewLoad()
     }
     
     
     // MARK: - Custom Functions
-    func viewSettingsDidLoad() {
-        let requestModel = FolderShowModels.Something.RequestModel()
-        interactor?.doSomething(request: requestModel)        
-    }
-    
-    func alertUser() {
-        let alert = NSAlert()
-        alert.alertStyle = .informational
-        alert.messageText = NSLocalizedString("Info", comment: "Info title message")
-        alert.informativeText = NSLocalizedString("Please enter any folder name", comment: "Alert informative text")
-        alert.addButton(withTitle: NSLocalizedString("Find", comment: "Find alert action button"))
-        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel alert action button"))
-
-        alert.beginSheetModal(for: self.view.window!) { (returnCode) in
-            print ("returnCode: ", returnCode)
+    func questionViewLoad() {
+        let questionShowVC = NSStoryboard(name: NSStoryboard.Name(rawValue: "QuestionShow"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "QuestionShowVC")) as! QuestionShowViewController
+        presentViewControllerAsModalWindow(questionShowVC)
+        
+        // Successfully find entered folder
+        questionShowVC.handlerFindSuccessfullCompletion = { () in
+            self.folderLoadContext()
         }
     }
     
-    func questionViewDidLoad() {
-        let questionShowVC = NSStoryboard(name: NSStoryboard.Name(rawValue: "QuestionShow"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "QuestionShowVC")) as! QuestionShowViewController
-        presentViewControllerAsModalWindow(questionShowVC)
+    func folderLoadContext() {
+        let requestModel = FolderShowModels.Folder.RequestModel()
+        self.interactor?.folderLoadContext(withRequestModel: requestModel)
+        print("folder path = \(String(describing: router?.dataStore!.folderURL.absoluteString))")
+    }
+}
+
+
+// MARK: - FileProviderDelegate
+extension FolderShowViewController: FileProviderDelegate {
+    func fileproviderSucceed(_ fileProvider: FileProviderOperations, operation: FileOperationType) {
+        switch operation {
+        case .copy(source: let source, destination: let dest):
+            print("\(source) copied to \(dest).")
+        
+        case .remove(path: let path):
+            print("\(path) has been deleted.")
+        
+        default:
+            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) succeed")
+        }
+    }
+    
+    func fileproviderFailed(_ fileProvider: FileProviderOperations, operation: FileOperationType, error: Error) {
+        switch operation {
+        case .copy(source: let source, destination: _):
+            print("copy of \(source) failed.")
+        
+        case .remove:
+            print("file can't be deleted.")
+        
+        default:
+            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) failed")
+        }
+    }
+    
+    func fileproviderProgress(_ fileProvider: FileProviderOperations, operation: FileOperationType, progress: Float) {
+        switch operation {
+        case .copy(source: let source, destination: let dest):
+            print("Copy\(source) to \(dest): \(progress * 100) completed.")
+        
+        default:
+            break
+        }
     }
 }
 
 
 // MARK: - FolderShowDisplayLogic
 extension FolderShowViewController: FolderShowDisplayLogic {
-    func displaySomething(viewModel: FolderShowModels.Something.ViewModel) {
+    func folderPresentLoadContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel) {
     }
 }

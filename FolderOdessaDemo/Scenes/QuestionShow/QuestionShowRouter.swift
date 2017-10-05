@@ -14,7 +14,7 @@ import Cocoa
 
 // MARK: - Input & Output protocols
 @objc protocol QuestionShowRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+    func routeToFolderShowScene()
 }
 
 protocol QuestionShowDataPassing {
@@ -28,29 +28,24 @@ class QuestionShowRouter: NSObject, QuestionShowRoutingLogic, QuestionShowDataPa
     
     
     // MARK: - Routing
-    //func routeToSomewhere(segue: UIStoryboardSegue?) {
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    //}
+    func routeToFolderShowScene() {
+        let destinationVC = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "FolderShowVC")) as! FolderShowViewController
+        var destinationDS = destinationVC.router!.dataStore!
+        
+        passDataToFolderShowScene(source: dataStore!, destination: &destinationDS)
+        navigateToFolderShowScene(source: viewController!, destination: destinationVC)
+    }
     
     
     // MARK: - Navigation
-    //func navigateToSomewhere(source: QuestionShowViewController, destination: SomewhereViewController) {
-    //  source.show(destination, sender: nil)
-    //}
+    func navigateToFolderShowScene(source: QuestionShowViewController, destination: FolderShowViewController) {
+        source.handlerFindSuccessfullCompletion!()
+        source.dismissViewController(source)
+    }
     
     
     // MARK: - Passing data
-    //func passDataToSomewhere(source: QuestionShowDataStore, destination: inout SomewhereDataStore) {
-    //  destination.name = source.name
-    //}
+    func passDataToFolderShowScene(source: QuestionShowDataStore, destination: inout FolderShowDataStore) {
+        destination.folderURL = source.folderURL!
+    }
 }

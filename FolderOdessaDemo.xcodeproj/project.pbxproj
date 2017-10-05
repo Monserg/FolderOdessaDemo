@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E4CCAD972286347245BB324 /* Pods_FolderOdessaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */; };
 		B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7DA1F8530E200999139 /* AppDelegate.swift */; };
 		B183D7DF1F8530E200999139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B183D7DE1F8530E200999139 /* Assets.xcassets */; };
 		B183D7E21F8530E200999139 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B183D7E01F8530E200999139 /* Main.storyboard */; };
@@ -49,6 +50,9 @@
 		B183D8261F8558C500999139 /* QuestionShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowViewController.swift; sourceTree = "<group>"; };
 		B183D8271F8558C500999139 /* QuestionShowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowInteractor.swift; sourceTree = "<group>"; };
 		B183D82F1F85625300999139 /* NSViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Ext.swift"; sourceTree = "<group>"; };
+		B3E3237BC68C717403AE97D0 /* Pods-FolderOdessaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FolderOdessaDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FolderOdessaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3FFDADC3410A9D1F42E7BD /* Pods-FolderOdessaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FolderOdessaDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,18 +60,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E4CCAD972286347245BB324 /* Pods_FolderOdessaDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67443560ADCB6C173B41199B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B3E3237BC68C717403AE97D0 /* Pods-FolderOdessaDemo.debug.xcconfig */,
+				DA3FFDADC3410A9D1F42E7BD /* Pods-FolderOdessaDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		B183D7CE1F8530E200999139 = {
 			isa = PBXGroup;
 			children = (
 				B183D7EA1F8531C700999139 /* ReadMe */,
 				B183D7D91F8530E200999139 /* FolderOdessaDemo */,
 				B183D7D81F8530E200999139 /* Products */,
+				67443560ADCB6C173B41199B /* Pods */,
+				E4DE315EDE2352FCF62BB6BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +169,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E4DE315EDE2352FCF62BB6BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -160,9 +184,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B183D7E71F8530E200999139 /* Build configuration list for PBXNativeTarget "FolderOdessaDemo" */;
 			buildPhases = (
+				A3BE3681228C47916F6FA708 /* [CP] Check Pods Manifest.lock */,
 				B183D7D31F8530E200999139 /* Sources */,
 				B183D7D41F8530E200999139 /* Frameworks */,
 				B183D7D51F8530E200999139 /* Resources */,
+				B5A74C91ECED320373A4C864 /* [CP] Embed Pods Frameworks */,
+				721588B5B2B869DB69E956DD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,6 +252,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		721588B5B2B869DB69E956DD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3BE3681228C47916F6FA708 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FolderOdessaDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5A74C91ECED320373A4C864 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FilesProvider/FilesProvider.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FilesProvider.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B183D7D31F8530E200999139 /* Sources */ = {
@@ -370,32 +451,40 @@
 		};
 		B183D7E81F8530E200999139 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3E3237BC68C717403AE97D0 /* Pods-FolderOdessaDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FolderOdessaDemo/FolderOdessaDemo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2DS2B364WY;
+				DEVELOPMENT_TEAM = M865L4T8LA;
 				INFOPLIST_FILE = FolderOdessaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.com.remotejob.FolderOdessaDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		B183D7E91F8530E200999139 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA3FFDADC3410A9D1F42E7BD /* Pods-FolderOdessaDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FolderOdessaDemo/FolderOdessaDemo.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2DS2B364WY;
+				DEVELOPMENT_TEAM = M865L4T8LA;
 				INFOPLIST_FILE = FolderOdessaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = ua.com.remotejob.FolderOdessaDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

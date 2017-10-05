@@ -21,9 +21,11 @@ enum QuestionShowModels {
         }
         
         struct ResponseModel {
+            var isFolderExists: Bool
         }
         
         struct ViewModel {
+            var isFolderExists: Bool
         }
     }
 }

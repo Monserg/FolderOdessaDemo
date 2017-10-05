@@ -14,6 +14,13 @@ import Cocoa
 
 class QuestionShowWorker {
     // MARK: - Business Logic
+    func folderExists(atPath path: String) -> Bool {
+        var isFolder = ObjCBool(true)
+        let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isFolder)
+        
+        return exists && isFolder.boolValue
+    }
+    
     func doSomeWork() {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!

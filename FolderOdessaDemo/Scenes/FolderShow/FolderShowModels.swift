@@ -15,7 +15,7 @@ import Cocoa
 // MARK: - Data models
 enum FolderShowModels {
     // MARK: - Use cases
-    enum Something {
+    enum Folder {
         struct RequestModel {
         }
         

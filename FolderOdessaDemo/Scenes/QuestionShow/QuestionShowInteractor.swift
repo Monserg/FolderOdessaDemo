@@ -14,26 +14,28 @@ import Cocoa
 
 // MARK: - Business Logic protocols
 protocol QuestionShowBusinessLogic {
-    func folderDidLoad(withRequestModel requestModel: QuestionShowModels.Folder.RequestModel)
+    func folderLoad(withRequestModel requestModel: QuestionShowModels.Folder.RequestModel)
 }
 
 protocol QuestionShowDataStore {
-    //var name: String { get set }
+    var folderURL: URL? { get set }
 }
 
 class QuestionShowInteractor: QuestionShowBusinessLogic, QuestionShowDataStore {
     // MARK: - Properties
     var presenter: QuestionShowPresentationLogic?
     var worker: QuestionShowWorker?
-    //var name: String = ""
     
+    var folderURL: URL?
+
     
     // MARK: - Business logic implementation
-    func folderDidLoad(withRequestModel requestModel: QuestionShowModels.Folder.RequestModel) {
+    func folderLoad(withRequestModel requestModel: QuestionShowModels.Folder.RequestModel) {
         worker = QuestionShowWorker()
-        worker?.doSomeWork()
         
-        let responseModel = QuestionShowModels.Folder.ResponseModel()
-        presenter?.presentSomething(response: responseModel)
+        let isFolderExists = worker!.folderExists(atPath: requestModel.path)
+        folderURL = isFolderExists ? URL(fileURLWithPath: requestModel.path) : nil
+        let responseModel = QuestionShowModels.Folder.ResponseModel(isFolderExists: isFolderExists)
+        presenter?.folderPreparePresentLoad(fromResponseModel: responseModel)
     }
 }

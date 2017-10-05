@@ -14,7 +14,7 @@ import Cocoa
 
 // MARK: - Presentation Logic protocols
 protocol FolderShowPresentationLogic {
-    func presentSomething(response: FolderShowModels.Something.ResponseModel)
+    func presentSomething(response: FolderShowModels.Folder.ResponseModel)
 }
 
 class FolderShowPresenter: FolderShowPresentationLogic {
@@ -23,8 +23,8 @@ class FolderShowPresenter: FolderShowPresentationLogic {
     
     
     // MARK: - Presentation Logic implementation
-    func presentSomething(response: FolderShowModels.Something.ResponseModel) {
-        let viewModel = FolderShowModels.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentSomething(response: FolderShowModels.Folder.ResponseModel) {
+        let viewModel = FolderShowModels.Folder.ViewModel()
+        viewController?.folderPresentLoadContext(fromViewModel: viewModel)
     }
 }

@@ -13,7 +13,7 @@ extension NSViewController {
         let alert = NSAlert()
         alert.alertStyle = .informational
         alert.messageText = NSLocalizedString("Info", comment: "Info title message")
-        alert.informativeText = NSLocalizedString("Please enter any folder name", comment: "Alert informative text")
+        alert.informativeText = NSLocalizedString("Please enter correct folder name", comment: "Alert informative text")
         alert.addButton(withTitle: NSLocalizedString("Ok", comment: "Find alert action button"))
         
         alert.beginSheetModal(for: self.view.window!) { (returnCode) in
