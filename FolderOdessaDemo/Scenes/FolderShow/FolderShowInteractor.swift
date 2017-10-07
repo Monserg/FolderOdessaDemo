@@ -14,28 +14,25 @@ import Cocoa
 
 // MARK: - Business Logic protocols
 protocol FolderShowBusinessLogic {
-    func folderLoadContext(withRequestModel requestModel: FolderShowModels.Folder.RequestModel)
+    func loadFolderContext(withRequestModel requestModel: FolderShowModels.Folder.RequestModel)
 }
 
-protocol FolderShowDataStore {
-    var folderURL: URL { get set }
-}
+protocol FolderShowDataStore {}
 
 class FolderShowInteractor: FolderShowBusinessLogic, FolderShowDataStore {
     // MARK: - Properties
     var presenter: FolderShowPresentationLogic?
     var worker: FolderShowWorker?
 
-    var folderURL: URL = URL(fileURLWithPath: "")
-
     
     // MARK: - Business logic implementation
-    func folderLoadContext(withRequestModel requestModel: FolderShowModels.Folder.RequestModel) {
+    func loadFolderContext(withRequestModel requestModel: FolderShowModels.Folder.RequestModel) {
         worker = FolderShowWorker()
         
-        worker?.folderContextLoad({ filesArray in
+        // Load selected folder context & send to Presenter
+        worker?.loadFolderContext({ filesArray in
             let responseModel = FolderShowModels.Folder.ResponseModel(files: filesArray)
-            self.presenter?.presentSomething(response: responseModel)
+            self.presenter?.presentLoadFolderContext(fromResponseModel: responseModel)
         })
     }
 }

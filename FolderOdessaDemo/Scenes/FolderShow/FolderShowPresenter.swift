@@ -14,17 +14,37 @@ import Cocoa
 
 // MARK: - Presentation Logic protocols
 protocol FolderShowPresentationLogic {
-    func presentSomething(response: FolderShowModels.Folder.ResponseModel)
+    func presentLoadFolderContext(fromResponseModel responseModel: FolderShowModels.Folder.ResponseModel)
 }
 
 class FolderShowPresenter: FolderShowPresentationLogic {
     // MARK: - Properties
     weak var viewController: FolderShowDisplayLogic?
     
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        return dateFormatter
+    }()
+
     
     // MARK: - Presentation Logic implementation
-    func presentSomething(response: FolderShowModels.Folder.ResponseModel) {
-        let viewModel = FolderShowModels.Folder.ViewModel()
-        viewController?.folderPresentLoadContext(fromViewModel: viewModel)
+    func presentLoadFolderContext(fromResponseModel responseModel: FolderShowModels.Folder.ResponseModel) {
+        // Prepare to present DisplayedFolder models
+        var models = [FolderShowModels.Folder.ViewModel.DisplayedFolder]()
+        
+        for file in responseModel.files {
+            
+            models.append(FolderShowModels.Folder.ViewModel.DisplayedFolder(name: file.name,
+                                                                            size: ByteCountFormatter().string(fromByteCount: file.size),
+                                                                            modifyDate: dateFormatter.string(from: file.modifiedDate!),
+                                                                            path: file.path,
+                                                                            isFolder: file.isDirectory))
+        }
+        
+        let viewModel = FolderShowModels.Folder.ViewModel(displayedFolders: models)
+        viewController?.displayLoadFolderContext(fromViewModel: viewModel)
     }
 }

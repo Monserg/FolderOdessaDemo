@@ -25,6 +25,15 @@ enum FolderShowModels {
         }
         
         struct ViewModel {
+            struct DisplayedFolder {
+                var name: String
+                var size: String
+                var modifyDate: String
+                var path: String
+                var isFolder: Bool
+            }
+            
+            var displayedFolders: [DisplayedFolder]
         }
     }
 }

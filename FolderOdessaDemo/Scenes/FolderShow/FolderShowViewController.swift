@@ -11,25 +11,29 @@
 //
 
 import Cocoa
-//import FilesProvider
 
 // MARK: - Input & Output protocols
 protocol FolderShowDisplayLogic: class {
-    func folderPresentLoadContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
+    func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
     var interactor: FolderShowBusinessLogic?
     var router: (NSObjectProtocol & FolderShowRoutingLogic & FolderShowDataPassing)?
-        
-//    var fileProvider: LocalFileProvider? {
-//        didSet {
-//            fileProvider!.delegate = self
-//        }
-//    }
     
-        
+    var displayedFiles: [FolderShowModels.Folder.ViewModel.DisplayedFolder] = []
+    
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: NSTableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
+    
+    
     // MARK: - Object lifecycle
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -76,104 +80,115 @@ class FolderShowViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Show modal NSOpenPanel
+        if let path = OpenPanelManager().open() {
+            if FolderManager.instance.fileProvider == nil {
+                FolderManager.instance.fileProviderCreate(withURL: path)
+            }
+            
+            // Read selected folder context
+            contextLoad()
+            
+            // Create folder observer
+            FolderManager.instance.fileProvider.registerNotifcation(path: "/", eventHandler: {
+                self.contextLoad()
+            })
+        }
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        questionViewLoad()
     }
     
     
     // MARK: - Custom Functions
-    func questionViewLoad() {
-        let questionShowVC = NSStoryboard(name: NSStoryboard.Name(rawValue: "QuestionShow"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "QuestionShowVC")) as! QuestionShowViewController
-        presentViewControllerAsModalWindow(questionShowVC)
-        
-        // Successfully find entered folder
-        questionShowVC.handlerFindSuccessfullCompletion = { () in
-            if FolderManager.instance.fileProvider == nil {
-                FolderManager.instance.fileProviderCreate(withURL: (self.router?.dataStore?.folderURL)!)
-                
-                // Register a new notification handler
-                FolderManager.instance.fileProvider.registerNotifcation(path: "/") {
-                    self.contextLoad()
-                }
-            }
-            
-            self.contextLoad()
-        }
-    }
-    
     func contextLoad() {
         let requestModel = FolderShowModels.Folder.RequestModel()
-        self.interactor?.folderLoadContext(withRequestModel: requestModel)
-        print("folder path = \(String(describing: (router?.dataStore?.folderURL)!.absoluteString))")
+        self.interactor?.loadFolderContext(withRequestModel: requestModel)
     }
-    
-//    func fileProviderCreate() {
-//        fileProvider = LocalFileProvider(baseURL: (router?.dataStore?.folderURL)!)
-//
-////        // Get list of files in a directory
-////        fileProvider!.contentsOfDirectory(path: "/", completionHandler: { contents, error in
-////            for file in contents {
-////                print("Name: \(file.name)")
-////                print("Size: \(file.size)")
-////                print("Creation Date: \(String(describing: file.creationDate))")
-////                print("Modification Date: \(String(describing: file.modifiedDate))")
-////            }
-////        })
-//        
-//        // Register a new notification handler
-//        fileProvider!.registerNotifcation(path: "/") {
-//            self.contextLoad()
-//        }
-//    }
 }
 
 
-//// MARK: - FileProviderDelegate
-//extension FolderShowViewController: FileProviderDelegate {
-//    func fileproviderSucceed(_ fileProvider: FileProviderOperations, operation: FileOperationType) {
-//        switch operation {
-//        case .copy(source: let source, destination: let dest):
-//            print("\(source) copied to \(dest).")
-//
-//        case .remove(path: let path):
-//            print("\(path) has been deleted.")
-//
-//        default:
-//            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) succeed")
-//        }
-//    }
-//
-//    func fileproviderFailed(_ fileProvider: FileProviderOperations, operation: FileOperationType, error: Error) {
-//        switch operation {
-//        case .copy(source: let source, destination: _):
-//            print("copy of \(source) failed.")
-//
-//        case .remove:
-//            print("file can't be deleted.")
-//
-//        default:
-//            print("\(operation.actionDescription) from \(operation.source) to \(String(describing: operation.destination)) failed")
-//        }
-//    }
-//
-//    func fileproviderProgress(_ fileProvider: FileProviderOperations, operation: FileOperationType, progress: Float) {
-//        switch operation {
-//        case .copy(source: let source, destination: let dest):
-//            print("Copy\(source) to \(dest): \(progress * 100) completed.")
-//
-//        default:
-//            break
-//        }
-//    }
-//}
+// MARK: - NSTableViewDataSource
+extension FolderShowViewController: NSTableViewDataSource {
+    fileprivate enum CellIdentifiers {
+        static let NameCell = "NameCell"
+        static let DateCell = "DateCell"
+        static let SizeCell = "SizeCell"
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return displayedFiles.count
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        var text: String = ""
+        var cellIdentifier: String = ""
+        
+        let file = displayedFiles[row]
+
+        switch tableColumn {
+        // Name + icon
+        case tableView.tableColumns[0]?:
+            text = file.name
+            cellIdentifier = CellIdentifiers.NameCell
+
+        // Modify date
+        case tableView.tableColumns[1]?:
+            text = file.modifyDate
+            cellIdentifier = CellIdentifiers.DateCell
+
+        // Size
+        case tableView.tableColumns[2]?:
+            text = file.size
+            cellIdentifier = CellIdentifiers.SizeCell
+
+        default:
+            break
+        }
+        
+        // Cell config
+        if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: nil) as? NSTableCellView {
+            cell.textField?.stringValue = text
+            
+            if tableColumn == tableView.tableColumns[0] {
+                if file.isFolder {
+                    cell.imageView?.image = NSImage(named: NSImage.Name(rawValue: "icon-folder"))
+                } else {
+                    let thumbSize = CGSize(width: 17, height: 17)
+                    
+                    if FolderManager.instance.fileProvider.thumbnailOfFileSupported(path: file.path) {
+                        FolderManager.instance.fileProvider.thumbnailOfFile(path: file.path, dimension: thumbSize, completionHandler: { (image, error) in
+                            DispatchQueue.main.async {
+                                cell.imageView?.image = image
+                            }
+                        })
+                    }
+                }
+            }
+            
+            return cell
+        }
+     
+        return nil
+    }
+}
+
+
+// MARK: -
+extension FolderShowViewController: NSTableViewDelegate {
+    
+}
 
 
 // MARK: - FolderShowDisplayLogic
 extension FolderShowViewController: FolderShowDisplayLogic {
-    func folderPresentLoadContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel) {
+    func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel) {
+        displayedFiles = viewModel.displayedFolders
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }

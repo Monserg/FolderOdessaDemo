@@ -20,13 +20,8 @@
 		B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F21F8536EF00999139 /* FolderShowViewController.swift */; };
 		B183D7F91F8536EF00999139 /* FolderShowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7F31F8536EF00999139 /* FolderShowInteractor.swift */; };
 		B183D8201F85588700999139 /* QuestionShow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B183D81F1F85588700999139 /* QuestionShow.storyboard */; };
-		B183D8281F8558C500999139 /* QuestionShowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8221F8558C500999139 /* QuestionShowPresenter.swift */; };
-		B183D8291F8558C500999139 /* QuestionShowWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8231F8558C500999139 /* QuestionShowWorker.swift */; };
-		B183D82A1F8558C500999139 /* QuestionShowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8241F8558C500999139 /* QuestionShowRouter.swift */; };
-		B183D82B1F8558C500999139 /* QuestionShowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8251F8558C500999139 /* QuestionShowModels.swift */; };
-		B183D82C1F8558C500999139 /* QuestionShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8261F8558C500999139 /* QuestionShowViewController.swift */; };
-		B183D82D1F8558C500999139 /* QuestionShowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D8271F8558C500999139 /* QuestionShowInteractor.swift */; };
 		B183D8301F85625300999139 /* NSViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D82F1F85625300999139 /* NSViewController+Ext.swift */; };
+		B1989A931F880E5F002D159E /* OpenPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1989A921F880E5F002D159E /* OpenPanelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,13 +40,8 @@
 		B183D7F21F8536EF00999139 /* FolderShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowViewController.swift; sourceTree = "<group>"; };
 		B183D7F31F8536EF00999139 /* FolderShowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderShowInteractor.swift; sourceTree = "<group>"; };
 		B183D81F1F85588700999139 /* QuestionShow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionShow.storyboard; sourceTree = "<group>"; };
-		B183D8221F8558C500999139 /* QuestionShowPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowPresenter.swift; sourceTree = "<group>"; };
-		B183D8231F8558C500999139 /* QuestionShowWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowWorker.swift; sourceTree = "<group>"; };
-		B183D8241F8558C500999139 /* QuestionShowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowRouter.swift; sourceTree = "<group>"; };
-		B183D8251F8558C500999139 /* QuestionShowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowModels.swift; sourceTree = "<group>"; };
-		B183D8261F8558C500999139 /* QuestionShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowViewController.swift; sourceTree = "<group>"; };
-		B183D8271F8558C500999139 /* QuestionShowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionShowInteractor.swift; sourceTree = "<group>"; };
 		B183D82F1F85625300999139 /* NSViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Ext.swift"; sourceTree = "<group>"; };
+		B1989A921F880E5F002D159E /* OpenPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPanelManager.swift; sourceTree = "<group>"; };
 		B3E3237BC68C717403AE97D0 /* Pods-FolderOdessaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FolderOdessaDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FolderOdessaDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3FFDADC3410A9D1F42E7BD /* Pods-FolderOdessaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FolderOdessaDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FolderOdessaDemo/Pods-FolderOdessaDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				B14B295F1F868E0400C078C3 /* FolderManager.swift */,
+				B1989A921F880E5F002D159E /* OpenPanelManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -123,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				B183D7ED1F85337E00999139 /* FolderShow */,
-				B183D8211F8558A700999139 /* QuestionShow */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -157,19 +147,6 @@
 				B183D81F1F85588700999139 /* QuestionShow.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		B183D8211F8558A700999139 /* QuestionShow */ = {
-			isa = PBXGroup;
-			children = (
-				B183D8271F8558C500999139 /* QuestionShowInteractor.swift */,
-				B183D8251F8558C500999139 /* QuestionShowModels.swift */,
-				B183D8221F8558C500999139 /* QuestionShowPresenter.swift */,
-				B183D8241F8558C500999139 /* QuestionShowRouter.swift */,
-				B183D8261F8558C500999139 /* QuestionShowViewController.swift */,
-				B183D8231F8558C500999139 /* QuestionShowWorker.swift */,
-			);
-			path = QuestionShow;
 			sourceTree = "<group>";
 		};
 		B183D82E1F85623800999139 /* Extensions */ = {
@@ -326,18 +303,13 @@
 				B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */,
 				B183D7F71F8536EF00999139 /* FolderShowModels.swift in Sources */,
 				B183D7F91F8536EF00999139 /* FolderShowInteractor.swift in Sources */,
-				B183D82B1F8558C500999139 /* QuestionShowModels.swift in Sources */,
-				B183D82D1F8558C500999139 /* QuestionShowInteractor.swift in Sources */,
-				B183D82A1F8558C500999139 /* QuestionShowRouter.swift in Sources */,
 				B183D7F41F8536EF00999139 /* FolderShowPresenter.swift in Sources */,
 				B183D8301F85625300999139 /* NSViewController+Ext.swift in Sources */,
 				B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */,
 				B14B29601F868E0400C078C3 /* FolderManager.swift in Sources */,
 				B183D7F51F8536EF00999139 /* FolderShowWorker.swift in Sources */,
+				B1989A931F880E5F002D159E /* OpenPanelManager.swift in Sources */,
 				B183D7F61F8536EF00999139 /* FolderShowRouter.swift in Sources */,
-				B183D8291F8558C500999139 /* QuestionShowWorker.swift in Sources */,
-				B183D8281F8558C500999139 /* QuestionShowPresenter.swift in Sources */,
-				B183D82C1F8558C500999139 /* QuestionShowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

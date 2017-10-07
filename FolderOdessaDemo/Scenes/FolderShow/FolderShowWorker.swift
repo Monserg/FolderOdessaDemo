@@ -15,7 +15,7 @@ import FilesProvider
 
 class FolderShowWorker {
     // MARK: - Business Logic
-    func folderContextLoad(_ completion: @escaping (_ data: [FileObject]) -> ()) {
+    func loadFolderContext(_ completion: @escaping (_ data: [FileObject]) -> ()) {
         // Get list of files in a directory
         FolderManager.instance.fileProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
             var files = [FileObject]()
@@ -25,7 +25,8 @@ class FolderShowWorker {
                 print("Size: \(file.size)")
                 print("Creation Date: \(String(describing: file.creationDate))")
                 print("Modification Date: \(String(describing: file.modifiedDate))")
-                
+                print("Path: \(String(describing: file.path))")
+
                 files.append(file)
             }
             
