@@ -36,11 +36,10 @@ class FolderShowPresenter: FolderShowPresentationLogic {
         var models = [FolderShowModels.Folder.ViewModel.DisplayedFolder]()
         
         for file in responseModel.files {
-            
             models.append(FolderShowModels.Folder.ViewModel.DisplayedFolder(name: file.name,
-                                                                            size: ByteCountFormatter().string(fromByteCount: file.size),
+                                                                            size: file.isDirectory ? "--" : ByteCountFormatter().string(fromByteCount: file.size),
                                                                             modifyDate: dateFormatter.string(from: file.modifiedDate!),
-                                                                            path: file.path,
+                                                                            ext: file.url.pathExtension,
                                                                             isFolder: file.isDirectory))
         }
         

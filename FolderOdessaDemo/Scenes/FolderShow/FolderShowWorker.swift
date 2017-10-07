@@ -21,16 +21,10 @@ class FolderShowWorker {
             var files = [FileObject]()
             
             for file in contents {
-                print("Name: \(file.name)")
-                print("Size: \(file.size)")
-                print("Creation Date: \(String(describing: file.creationDate))")
-                print("Modification Date: \(String(describing: file.modifiedDate))")
-                print("Path: \(String(describing: file.path))")
-
                 files.append(file)
             }
             
-            completion(files)
+            completion(files.filter({!$0.name.hasPrefix(".")}))
         })
     }
 }

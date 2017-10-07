@@ -29,7 +29,7 @@ enum FolderShowModels {
                 var name: String
                 var size: String
                 var modifyDate: String
-                var path: String
+                var ext: String
                 var isFolder: Bool
             }
             

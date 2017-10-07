@@ -153,19 +153,7 @@ extension FolderShowViewController: NSTableViewDataSource {
             cell.textField?.stringValue = text
             
             if tableColumn == tableView.tableColumns[0] {
-                if file.isFolder {
-                    cell.imageView?.image = NSImage(named: NSImage.Name(rawValue: "icon-folder"))
-                } else {
-                    let thumbSize = CGSize(width: 17, height: 17)
-                    
-                    if FolderManager.instance.fileProvider.thumbnailOfFileSupported(path: file.path) {
-                        FolderManager.instance.fileProvider.thumbnailOfFile(path: file.path, dimension: thumbSize, completionHandler: { (image, error) in
-                            DispatchQueue.main.async {
-                                cell.imageView?.image = image
-                            }
-                        })
-                    }
-                }
+                cell.imageView?.image = file.isFolder ? NSImage(named: NSImage.Name(rawValue: "icon-folder")) : NSWorkspace.shared.icon(forFileType: file.ext)
             }
             
             return cell
