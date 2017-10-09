@@ -11,11 +11,17 @@
 //
 
 import Cocoa
+import PagedArray
 
 // MARK: - Input & Output protocols
 protocol FolderShowDisplayLogic: class {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
+
+// MARK: - Pagination
+let paginationDisplayedRows = 10
+let paginationPageSize = 25
+var paginationTotalCount = 2000
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
@@ -23,7 +29,7 @@ class FolderShowViewController: NSViewController {
     var router: (NSObjectProtocol & FolderShowRoutingLogic & FolderShowDataPassing)?
     
     var displayedFiles: [FolderShowModels.Folder.ViewModel.DisplayedFolder] = []
-    
+
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: NSTableView! {
@@ -156,6 +162,7 @@ extension FolderShowViewController: NSTableViewDataSource {
                 cell.imageView?.image = file.isFolder ? NSImage(named: NSImage.Name(rawValue: "icon-folder")) : NSWorkspace.shared.icon(forFileType: file.ext)
             }
             
+            print(row)
             return cell
         }
      
@@ -174,8 +181,14 @@ extension FolderShowViewController: NSTableViewDelegate {
 extension FolderShowViewController: FolderShowDisplayLogic {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel) {
         displayedFiles = viewModel.displayedFolders
-
+        paginationTotalCount = displayedFiles.count
+        
         DispatchQueue.main.async {
+            
+//                        self.tableView.reloadData(forRowIndexes: IndexSet(integersIn: Range(0...90)),
+//                                      columnIndexes: IndexSet(integersIn: Range(0..<self.tableView.numberOfColumns)))
+
+
             self.tableView.reloadData()
         }
     }

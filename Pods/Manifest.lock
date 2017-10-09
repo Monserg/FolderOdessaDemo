@@ -1,0 +1,15 @@
+PODS:
+  - FilesProvider (0.20.1)
+  - PagedArray (0.7)
+
+DEPENDENCIES:
+  - FilesProvider (~> 0.20)
+  - PagedArray (~> 0.7)
+
+SPEC CHECKSUMS:
+  FilesProvider: c88f6eff9bba7e551745bbbb08760351b4951448
+  PagedArray: 1f00b0a693758ec03b10026d76c6ad78903ba01d
+
+PODFILE CHECKSUM: d6f68163577b81fd69a64f4107050233e27fed75
+
+COCOAPODS: 1.4.0.beta.1
