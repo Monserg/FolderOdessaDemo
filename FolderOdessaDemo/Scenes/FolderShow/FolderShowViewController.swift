@@ -134,7 +134,7 @@ class FolderShowViewController: NSViewController {
             return
         }
         
-        if !pageUpdated.contains(UInt(index)) && index == displayedFiles.count - 2 {
+        if !pageUpdated.contains(UInt(index)) && index == displayedFiles.count - 1 {
             contextLoad(forPage: currentPage)
         }
 
@@ -200,7 +200,7 @@ extension FolderShowViewController: NSTableViewDelegate {
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 150
+        return 50
     }
 }
 

@@ -18,8 +18,8 @@ class OpenPanelManager {
         fileDialog.canChooseDirectories = true
         fileDialog.canChooseFiles = false
         fileDialog.resolvesAliases = true
-        fileDialog.runModal()
         
-        return fileDialog.url
+        
+        return fileDialog.runModal().rawValue == NSApplication.ModalResponse.OK.rawValue ? fileDialog.url : nil
     }
 }
