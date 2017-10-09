@@ -19,14 +19,17 @@ class FolderShowWorker {
         // Get list of files in a directory
         FolderManager.instance.fileProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
             var files = [FileObject]()
-            let start = Int(page * pageRows)
-            let finish = Int(page * pageRows + pageRows)
+            let start = contents.count >= Int(page * pageRows) ? Int(page * pageRows) : nil
+            let finish = contents.count >= Int(page * pageRows + pageRows) ? Int(page * pageRows + pageRows) : contents.count - 1
             
-            for file in contents[start...finish] {
-                files.append(file)
+            if start != nil {
+                for file in contents[start!...finish] {
+                    files.append(file)
+                }
             }
             
-            completion(files.filter({!$0.name.hasPrefix(".")}))
+            completion(files)
+//            completion(files.filter({!$0.name.hasPrefix(".")}))
         })
     }
 }

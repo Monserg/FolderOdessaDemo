@@ -853,6 +853,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="scrollView" destination="eCe-Cd-28l" id="mcD-OF-WkI"/>
                         <outlet property="tableView" destination="aZ0-Og-MK2" id="Ne1-PA-Y2c"/>
                     </connections>
                 </viewController>

@@ -17,7 +17,7 @@ protocol FolderShowDisplayLogic: class {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
 
-let pageRows: UInt = 20
+let pageRows: UInt = 10
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
@@ -28,6 +28,7 @@ class FolderShowViewController: NSViewController {
     
     // Pagination
     var currentPage: UInt = 0
+    var pageUpdated = Set<UInt>()
     
     
     // MARK: - IBOutlets
@@ -35,6 +36,17 @@ class FolderShowViewController: NSViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+        }
+    }
+    
+    @IBOutlet weak var scrollView: NSScrollView! {
+        didSet {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(scrollViewDidScroll(_:)),
+                name: NSView.boundsDidChangeNotification,
+                object: tableView
+            )
         }
     }
     
@@ -85,10 +97,6 @@ class FolderShowViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Pagination
-//        filesPaginator = ...
-//            filesPaginator.fetchFirstPage()
-
         // Show modal NSOpenPanel
         if let path = OpenPanelManager().open() {
             if FolderManager.instance.fileProvider == nil {
@@ -100,9 +108,14 @@ class FolderShowViewController: NSViewController {
             
             // Create folder observer
             FolderManager.instance.fileProvider.registerNotifcation(path: "/", eventHandler: {
+                self.currentPage = 0
+                self.pageUpdated.removeAll()
                 self.contextLoad(forPage: self.currentPage)
             })
         }
+        
+        scrollView.documentView = self.tableView
+
     }
     
     
@@ -110,6 +123,21 @@ class FolderShowViewController: NSViewController {
     func contextLoad(forPage page: UInt) {
         let requestModel = FolderShowModels.Folder.RequestModel(pageNumber: currentPage)
         self.interactor?.loadFolderContext(withRequestModel: requestModel)
+    }
+    
+    @objc func scrollViewDidScroll(_ notification: NSNotification) {
+        let range = tableView.rows(in: tableView.visibleRect)
+        let index = range.location + range.length - 1
+        print(index)
+        
+        guard index > 0 else {
+            return
+        }
+        
+        if !pageUpdated.contains(UInt(index)) && index == displayedFiles.count - 2 {
+            contextLoad(forPage: currentPage)
+        }
+
     }
 }
 
@@ -139,7 +167,7 @@ extension FolderShowViewController: NSTableViewDelegate {
         switch tableColumn {
         // Name + icon
         case tableView.tableColumns[0]?:
-            text = file.name
+            text = "\(row). " + file.name
             cellIdentifier = CellIdentifiers.NameCell
 
         // Modify date
@@ -170,6 +198,10 @@ extension FolderShowViewController: NSTableViewDelegate {
      
         return nil
     }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 150
+    }
 }
 
 
@@ -181,6 +213,10 @@ extension FolderShowViewController: FolderShowDisplayLogic {
         } else {
             displayedFiles.append(contentsOf: viewModel.displayedFolders)
         }
+        
+        pageUpdated.insert(currentPage)
+        currentPage += 1
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

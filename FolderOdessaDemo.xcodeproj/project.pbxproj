@@ -481,7 +481,7 @@
 				B183D7E61F8530E200999139 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B183D7E71F8530E200999139 /* Build configuration list for PBXNativeTarget "FolderOdessaDemo" */ = {
 			isa = XCConfigurationList;
@@ -490,7 +490,7 @@
 				B183D7E91F8530E200999139 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
