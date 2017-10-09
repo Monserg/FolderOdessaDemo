@@ -7,6 +7,5 @@ target 'FolderOdessaDemo' do
 
     # Pods for FolderOdessaDemo
     pod 'FilesProvider', '~> 0.20'
-    pod 'PagedArray', '~> 0.7'
-
+    
 end

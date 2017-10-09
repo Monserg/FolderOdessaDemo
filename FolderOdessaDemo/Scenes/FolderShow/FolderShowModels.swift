@@ -18,6 +18,7 @@ enum FolderShowModels {
     // MARK: - Use cases
     enum Folder {
         struct RequestModel {
+            let pageNumber: UInt
         }
         
         struct ResponseModel {

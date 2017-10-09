@@ -15,12 +15,14 @@ import FilesProvider
 
 class FolderShowWorker {
     // MARK: - Business Logic
-    func loadFolderContext(_ completion: @escaping (_ data: [FileObject]) -> ()) {
+    func loadFolderContext(forPage page: UInt, completion: @escaping (_ data: [FileObject]) -> ()) {
         // Get list of files in a directory
         FolderManager.instance.fileProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
             var files = [FileObject]()
+            let start = Int(page * pageRows)
+            let finish = Int(page * pageRows + pageRows)
             
-            for file in contents {
+            for file in contents[start...finish] {
                 files.append(file)
             }
             

@@ -11,17 +11,13 @@
 //
 
 import Cocoa
-import PagedArray
 
 // MARK: - Input & Output protocols
 protocol FolderShowDisplayLogic: class {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
 
-// MARK: - Pagination
-let paginationDisplayedRows = 10
-let paginationPageSize = 25
-var paginationTotalCount = 2000
+let pageRows: UInt = 20
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
@@ -29,7 +25,10 @@ class FolderShowViewController: NSViewController {
     var router: (NSObjectProtocol & FolderShowRoutingLogic & FolderShowDataPassing)?
     
     var displayedFiles: [FolderShowModels.Folder.ViewModel.DisplayedFolder] = []
-
+    
+    // Pagination
+    var currentPage: UInt = 0
+    
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: NSTableView! {
@@ -86,6 +85,10 @@ class FolderShowViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Pagination
+//        filesPaginator = ...
+//            filesPaginator.fetchFirstPage()
+
         // Show modal NSOpenPanel
         if let path = OpenPanelManager().open() {
             if FolderManager.instance.fileProvider == nil {
@@ -93,24 +96,19 @@ class FolderShowViewController: NSViewController {
             }
             
             // Read selected folder context
-            contextLoad()
+            contextLoad(forPage: currentPage)
             
             // Create folder observer
             FolderManager.instance.fileProvider.registerNotifcation(path: "/", eventHandler: {
-                self.contextLoad()
+                self.contextLoad(forPage: self.currentPage)
             })
         }
     }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        
-    }
-    
     
     // MARK: - Custom Functions
-    func contextLoad() {
-        let requestModel = FolderShowModels.Folder.RequestModel()
+    func contextLoad(forPage page: UInt) {
+        let requestModel = FolderShowModels.Folder.RequestModel(pageNumber: currentPage)
         self.interactor?.loadFolderContext(withRequestModel: requestModel)
     }
 }
@@ -127,7 +125,11 @@ extension FolderShowViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return displayedFiles.count
     }
+}
 
+
+// MARK: - NSTableViewDelegate
+extension FolderShowViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var text: String = ""
         var cellIdentifier: String = ""
@@ -171,24 +173,15 @@ extension FolderShowViewController: NSTableViewDataSource {
 }
 
 
-// MARK: -
-extension FolderShowViewController: NSTableViewDelegate {
-    
-}
-
-
 // MARK: - FolderShowDisplayLogic
 extension FolderShowViewController: FolderShowDisplayLogic {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel) {
-        displayedFiles = viewModel.displayedFolders
-        paginationTotalCount = displayedFiles.count
-        
+        if currentPage == 0 {
+            displayedFiles = viewModel.displayedFolders
+        } else {
+            displayedFiles.append(contentsOf: viewModel.displayedFolders)
+        }
         DispatchQueue.main.async {
-            
-//                        self.tableView.reloadData(forRowIndexes: IndexSet(integersIn: Range(0...90)),
-//                                      columnIndexes: IndexSet(integersIn: Range(0..<self.tableView.numberOfColumns)))
-
-
             self.tableView.reloadData()
         }
     }

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowViewController.swift"
-            timestampString = "529093595.520078"
+            timestampString = "529249250.653212"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "displayLoadFolderContext(fromViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowViewController.swift"
-            timestampString = "529093595.520606"
+            timestampString = "529249250.653265"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "tableView(_:viewFor:row:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "displayLoadFolderContext(fromViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowViewController.swift"
-            timestampString = "529093595.521006"
+            filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowWorker.swift"
+            timestampString = "529249250.653312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "tableView(_:viewFor:row:)"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "loadFolderContext(forPage:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowViewController.swift"
-            timestampString = "529093595.521365"
+            filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowWorker.swift"
+            timestampString = "529249250.653355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "numberOfRows(in:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "loadFolderContext(forPage:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;FilesProvider.FileObject&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FolderOdessaDemo.FolderShowWorker.loadFolderContext(forPage: Swift.UInt, completion: (Swift.Array&lt;FilesProvider.FileObject&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FolderOdessaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msm72/MEGAsync/MEGA_Yahoo.com/Swift/Codes%20demo/FolderOdessaDemo/FolderOdessaDemo/Scenes/FolderShow/FolderShowWorker.swift"
+                  timestampString = "529248822.933985"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "1091">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FilesProvider.FileObject) -&gt; Swift.Bool in closure #1 (Swift.Array&lt;FilesProvider.FileObject&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FolderOdessaDemo.FolderShowWorker.loadFolderContext(forPage: Swift.UInt, completion: (Swift.Array&lt;FilesProvider.FileObject&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FolderOdessaDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/msm72/MEGAsync/MEGA_Yahoo.com/Swift/Codes%20demo/FolderOdessaDemo/FolderOdessaDemo/Scenes/FolderShow/FolderShowWorker.swift"
+                  timestampString = "529248822.935928"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "14">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FolderOdessaDemo/Scenes/FolderShow/FolderShowViewController.swift"
+            timestampString = "529249250.653396"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "displayLoadFolderContext(fromViewModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

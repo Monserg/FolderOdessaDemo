@@ -30,7 +30,7 @@ class FolderShowInteractor: FolderShowBusinessLogic, FolderShowDataStore {
         worker = FolderShowWorker()
         
         // Load selected folder context & send to Presenter
-        worker?.loadFolderContext({ filesArray in
+        worker?.loadFolderContext(forPage: requestModel.pageNumber, completion: { filesArray in
             let responseModel = FolderShowModels.Folder.ResponseModel(files: filesArray)
             self.presenter?.presentLoadFolderContext(fromResponseModel: responseModel)
         })
