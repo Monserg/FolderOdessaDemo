@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E4CCAD972286347245BB324 /* Pods_FolderOdessaDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D267227F1F126AF685B534 /* Pods_FolderOdessaDemo.framework */; };
+		B10B580B1F8F46F300418417 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10B580A1F8F46F300418417 /* Array+Ext.swift */; };
 		B14B29601F868E0400C078C3 /* FolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14B295F1F868E0400C078C3 /* FolderManager.swift */; };
 		B183D7DB1F8530E200999139 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183D7DA1F8530E200999139 /* AppDelegate.swift */; };
 		B183D7DF1F8530E200999139 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B183D7DE1F8530E200999139 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B10B580A1F8F46F300418417 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		B14B295F1F868E0400C078C3 /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
 		B183D7D71F8530E200999139 /* FolderOdessaDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolderOdessaDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B183D7DA1F8530E200999139 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		B183D82E1F85623800999139 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B10B580A1F8F46F300418417 /* Array+Ext.swift */,
 				B183D82F1F85625300999139 /* NSViewController+Ext.swift */,
 			);
 			path = Extensions;
@@ -306,6 +309,7 @@
 				B183D7F41F8536EF00999139 /* FolderShowPresenter.swift in Sources */,
 				B183D8301F85625300999139 /* NSViewController+Ext.swift in Sources */,
 				B183D7F81F8536EF00999139 /* FolderShowViewController.swift in Sources */,
+				B10B580B1F8F46F300418417 /* Array+Ext.swift in Sources */,
 				B14B29601F868E0400C078C3 /* FolderManager.swift in Sources */,
 				B183D7F51F8536EF00999139 /* FolderShowWorker.swift in Sources */,
 				B1989A931F880E5F002D159E /* OpenPanelManager.swift in Sources */,

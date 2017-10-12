@@ -17,7 +17,7 @@ protocol FolderShowDisplayLogic: class {
     func displayLoadFolderContext(fromViewModel viewModel: FolderShowModels.Folder.ViewModel)
 }
 
-let pageRows: UInt = 10
+let pageRows: UInt = 30
 
 class FolderShowViewController: NSViewController {
     // MARK: - Properties
@@ -30,13 +30,16 @@ class FolderShowViewController: NSViewController {
     var currentPage: UInt = 0
     var pageUpdated = Set<UInt>()
     
+    // Ordered
+    var sortOrder = "name"
+    var sortAscending = true
+
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: NSTableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
-            tableView.sizeToFit()
         }
     }
     
@@ -105,28 +108,32 @@ class FolderShowViewController: NSViewController {
             }
             
             // Read selected folder context
-            contextLoad(forPage: currentPage)
+            contextLoad(forPage: currentPage, sortBy: sortOrder, withAscending: sortAscending)
             
             // Create folder observer
             FolderManager.instance.fileProvider.registerNotifcation(path: "/", eventHandler: {
                 self.currentPage = 0
                 self.pageUpdated.removeAll()
-                self.contextLoad(forPage: self.currentPage)
+                self.contextLoad(forPage: self.currentPage, sortBy: self.sortOrder, withAscending: self.sortAscending)
             })
         }
         
         scrollView.documentView = self.tableView
+        
+        let descriptorName = NSSortDescriptor(key: "name", ascending: true)
+        let descriptorDate = NSSortDescriptor(key: "modifyDate", ascending: true)
+        let descriptorSize = NSSortDescriptor(key: "size", ascending: true)
+        
+        tableView.tableColumns[0].sortDescriptorPrototype = descriptorName
+        tableView.tableColumns[1].sortDescriptorPrototype = descriptorDate
+        tableView.tableColumns[2].sortDescriptorPrototype = descriptorSize
 
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(tableViewRebuildColumnsWidth(_:)),
-//                                               name: NSView.frameDidChangeNotification,
-//                                               object: nil)
     }
     
     
     // MARK: - Custom Functions
-    func contextLoad(forPage page: UInt) {
-        let requestModel = FolderShowModels.Folder.RequestModel(pageNumber: currentPage)
+    func contextLoad(forPage page: UInt, sortBy order: String, withAscending ascending: Bool) {
+        let requestModel = FolderShowModels.Folder.RequestModel(sortOrder: order, sortAscending: ascending, pageNumber: currentPage)
         self.interactor?.loadFolderContext(withRequestModel: requestModel)
     }
     
@@ -140,20 +147,8 @@ class FolderShowViewController: NSViewController {
         }
         
         if !pageUpdated.contains(UInt(index)) && index == displayedFiles.count - 1 {
-            contextLoad(forPage: currentPage)
+            contextLoad(forPage: currentPage, sortBy: sortOrder, withAscending: sortAscending)
         }
-    }
-    
-    @objc func tableViewRebuildColumnsWidth(_ notification: Notification) {
-        let spacingWidth = tableView.intercellSpacing.width
-        let tableWidth = tableView.frame.width
-        let sizeColumnWidth: CGFloat = (120 - spacingWidth) / 480 * tableWidth
-        let dateColumnWidth: CGFloat = (110 - spacingWidth) / 480 * tableWidth
-        let nameColumnWidth = tableWidth - dateColumnWidth - sizeColumnWidth
-
-        tableView.tableColumns[0].width = nameColumnWidth
-        tableView.tableColumns[1].width = dateColumnWidth
-        tableView.tableColumns[2].width = sizeColumnWidth
     }
 }
 
@@ -169,12 +164,6 @@ extension FolderShowViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return displayedFiles.count
     }
-    
-    func tableView(_ tableView: NSTableView, sizeToFitWidthOfColumn column: Int) -> CGFloat {
-        return 120
-    }
-    
-
 }
 
 
@@ -223,6 +212,22 @@ extension FolderShowViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 50
+    }
+    
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        guard let sortDescriptor = tableView.sortDescriptors.first else {
+            return
+        }
+        
+        if let order = sortDescriptor.key {
+            sortOrder = order
+            sortAscending = sortDescriptor.ascending
+            
+            currentPage = 0
+            pageUpdated.removeAll()
+            displayedFiles.removeAll()
+            contextLoad(forPage: currentPage, sortBy: sortOrder, withAscending: sortAscending)
+        }
     }
 }
 

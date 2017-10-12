@@ -15,15 +15,16 @@ import FilesProvider
 
 class FolderShowWorker {
     // MARK: - Business Logic
-    func loadFolderContext(forPage page: UInt, completion: @escaping (_ data: [FileObject]) -> ()) {
+    func loadFolderContext(forPage page: UInt, sortBy order: String, withAscending ascending: Bool, completion: @escaping (_ data: [FileObject]) -> ()) {
         // Get list of files in a directory
         FolderManager.instance.fileProvider.contentsOfDirectory(path: "/", completionHandler: { contents, error in
             var files = [FileObject]()
             let start = contents.count >= Int(page * pageRows) ? Int(page * pageRows) : nil
             let finish = contents.count >= Int(page * pageRows + pageRows) ? Int(page * pageRows + pageRows) : contents.count
+            let sortedContents = contents.orderedBy(order, ascending: ascending)
             
             if start != nil {
-                for file in contents[start!..<finish] {
+                for file in sortedContents[start!..<finish] {
                     files.append(file)
                 }
             }

@@ -18,6 +18,8 @@ enum FolderShowModels {
     // MARK: - Use cases
     enum Folder {
         struct RequestModel {
+            let sortOrder: String
+            let sortAscending: Bool
             let pageNumber: UInt
         }
         
