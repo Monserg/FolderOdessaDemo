@@ -19,3 +19,7 @@ Case 3 'Create change file modification monitoring manager'
 Case 4 'Get folder context'
 
 Case 5 'Modify select folder scene'
+
+Case 6 'Resize columns width after change window size'
+
+

@@ -36,6 +36,7 @@ class FolderShowViewController: NSViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.sizeToFit()
         }
     }
     
@@ -116,6 +117,10 @@ class FolderShowViewController: NSViewController {
         
         scrollView.documentView = self.tableView
 
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(tableViewRebuildColumnsWidth(_:)),
+//                                               name: NSView.frameDidChangeNotification,
+//                                               object: nil)
     }
     
     
@@ -137,7 +142,18 @@ class FolderShowViewController: NSViewController {
         if !pageUpdated.contains(UInt(index)) && index == displayedFiles.count - 1 {
             contextLoad(forPage: currentPage)
         }
+    }
+    
+    @objc func tableViewRebuildColumnsWidth(_ notification: Notification) {
+        let spacingWidth = tableView.intercellSpacing.width
+        let tableWidth = tableView.frame.width
+        let sizeColumnWidth: CGFloat = (120 - spacingWidth) / 480 * tableWidth
+        let dateColumnWidth: CGFloat = (110 - spacingWidth) / 480 * tableWidth
+        let nameColumnWidth = tableWidth - dateColumnWidth - sizeColumnWidth
 
+        tableView.tableColumns[0].width = nameColumnWidth
+        tableView.tableColumns[1].width = dateColumnWidth
+        tableView.tableColumns[2].width = sizeColumnWidth
     }
 }
 
@@ -153,6 +169,12 @@ extension FolderShowViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return displayedFiles.count
     }
+    
+    func tableView(_ tableView: NSTableView, sizeToFitWidthOfColumn column: Int) -> CGFloat {
+        return 120
+    }
+    
+
 }
 
 
